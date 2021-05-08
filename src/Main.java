@@ -7,7 +7,7 @@ public class Main {
 		
 		board = new Board();
 		
-		board.drawBoard();
+		board.startGame();
 		
 	}
 }

@@ -3,10 +3,24 @@ public abstract class Entity {
 	
 	protected String symbol;
 	protected Boolean isTurn;
-	protected Boolean isFirst;
+
 	
 	public Entity(String symbol) {
+		
+		initialize(symbol);
+	}
+	
+	private void initialize(String symbol){
 		this.symbol = symbol;
+		
+		if(this.symbol == "X") {
+			this.isTurn = true;
+		}
+
+		else if(this.symbol == "O") {
+			this.isTurn = false;
+		}
+			
 	}
 
 	public String getSymbol() {
@@ -25,13 +39,5 @@ public abstract class Entity {
 		this.isTurn = isTurn;
 	}
 
-	public Boolean getIsFirst() {
-		return isFirst;
-	}
-
-	public void setIsFirst(Boolean isFirst) {
-		this.isFirst = isFirst;
-	}
-	
 	
 }
