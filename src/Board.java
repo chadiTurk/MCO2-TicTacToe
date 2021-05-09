@@ -6,17 +6,22 @@ public class Board {
 	private Computer computer;
 	private int row;
 	private int col;
-	private String[][] symbols;
+	private String[][] board;
+	private int[][] locations;
 	private Scanner scanner;
-	
+	private boolean hasWinner;
+	private String currSymbol;
 	
 	public Board() {
 		this.human = new Human("X");
 		this.computer = new Computer("O");
 		this.row = 4;
 		this.col = 4;
-		this.symbols = new String[4][4];
+		this.board = new String[4][4];
+		this.locations = new int[4][4];
 		this.scanner = new Scanner(System.in);
+		this.hasWinner = false;
+		this.currSymbol = "";
 	}
 	
 
@@ -25,16 +30,23 @@ public class Board {
 		
 		String number;
 		
-		initializeBoard();
 		
+		
+		
+		initializeBoard();
+		initializeLocations();
+		
+		drawLocations();
 		drawBoard();
 		
-		while(boardIsNotFull()) {
+		while(boardIsNotFull() && hasWinner == false) {
 			
 			System.out.println("Enter number:");
 			number = scanner.nextLine();
 			playerMove(number);
 			
+			System.out.println(System.lineSeparator().repeat(150));
+			drawLocations();
 			drawBoard();
 			
 			//checkWin Conditions Here
@@ -47,29 +59,89 @@ public class Board {
 	public void initializeBoard() {
 		for(int i=0;i<4;i++) {
 			for(int j =0;j<4;j++) {
-				this.symbols[i][j] ="-";
+				this.board[i][j] ="-";
 			}
 		}
 	}
 	
 	public void drawBoard() {
+		
+		drawSpace();
 		System.out.println("-----------------");
 		
 		for(int i =0;i<row;i++) {
+			drawSpace();
 			System.out.print("| ");
 			for( int j = 0;j<col;j++) {
-				System.out.print(symbols[i][j] + " | ");
+				System.out.print(board[i][j] + " | ");
 			}
 			
 			System.out.println();
+			drawSpace();
 			System.out.println("-----------------");
 		}
 		
+		if(this.hasWinner == true){
+			if(currSymbol == computer.getSymbol()) {
+				System.out.println("The computer (" + currSymbol + ")" + " has won the game!" );
+			}
+			else if(currSymbol == human.getSymbol()) {
+				System.out.println("The human (" + currSymbol + ")" + " has won the game!" );
+			}
+		}
+		
+	}
+	
+	public void initializeLocations() {
+		int location = 1;
+		
+		for(int i=0;i<4;i++) {
+			for(int j =0;j<4;j++) {
+				this.locations[i][j] = location++;
+			}
+		}
+	}
+	
+	public void drawLocations() {
+		
+		drawSpace();
+		System.out.println("-----------------");
+		
+		for(int i =0;i<row;i++) {
+			drawSpace();
+			System.out.print("| ");
+			for( int j = 0;j<col;j++) {
+				if(locations[i][j] < 10) {
+						System.out.print(locations[i][j] + " | ");
+				}
+					
+				else {
+					System.out.print(locations[i][j] + "| ");
+				}
+					
+			}
+			
+			System.out.println();
+			drawSpace();
+			System.out.println("-----------------");
+		}
+		
+		
+		
+	
+		
+	}
+	
+	
+	private void drawSpace() {
+		System.out.print("                            ");
 	}
 	
 	public boolean playerMove(String move){
 		
 		String symbol = checkTurn();
+		currSymbol = symbol;
+		
 		
 		switch(move)
 		{
@@ -208,12 +280,16 @@ public class Board {
 	}
 	
 	public void placeSymbol(int row,int col,String symbol) {
-		symbols[row][col] = symbol;
+		board[row][col] = symbol;
+		
+		this.hasWinner = checkWin(row,col,symbol);
+
+		
 	}
 	
 	public boolean checkIfEmpty(int row, int col){
 		
-		if(symbols[row][col] =="-")
+		if(board[row][col] =="-")
 			return true;
 		else
 			return false;
@@ -235,7 +311,7 @@ public class Board {
 	public boolean boardIsNotFull() {
 		for(int i = 0;i<row;i++) {
 			for(int j = 0;j<col;j++) {
-				if(symbols[i][j] == "-")
+				if(board[i][j] == "-")
 					return true;
 					
 			}
@@ -244,36 +320,36 @@ public class Board {
 		return false;
 	}
 	
-	public boolean checkWin(String symbol) {
+	public boolean checkWin(int x, int y, String symbol) {
 		
-		if(checkRowWin(symbol) ||checkColWin(symbol) ||checkDiagonalWin(symbol)) {
-			return true;
+
+		int row = 0, col = 0, diag = 0, rdiag = 0;
+		
+		boolean winner = false;
+		
+		for(int i = 0;i<4;i++) {
+			if(board[x][i] == symbol )
+				col++;
+			if(board[i][y] == symbol )
+				row++;
+			if(board[i][i] == symbol)
+				diag++;
+			if(board[i][(4-1)-i] == symbol)
+				rdiag++;
+			
+			if(row == 3 || col == 3 || diag == 3 || rdiag == 3 ) {
+				winner = true;
+				break;
+			}
+				
 		}
 		
-		return false;
-		
+		return winner;
+
 	}
+		
 	
-	public boolean checkRowWin(String symbol) {
-		
-		//Don't do this one by one use a more efficient method
-		
-		
-		
+	public String[][] getBoard(){	
+		return this.board;
 	}
-	
-	public boolean checkColWin(String symbol) {
-		
-	}
-	
-	public boolean checkDiagonalWin(String symbol) {
-		
-	}
-	
-	
-	
-	
-	
-	
-	
 }
