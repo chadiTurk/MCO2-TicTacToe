@@ -11,9 +11,7 @@ public class Board {
 	private Scanner scanner;
 	private boolean hasWinner;
 	private String currSymbol;
-	private ArrayList<Symbols> symbols;
-	
-	
+
 	public Board() {
 		this.human = new Human("X");
 		this.computer = new Computer("O");
@@ -24,7 +22,7 @@ public class Board {
 		this.scanner = new Scanner(System.in);
 		this.hasWinner = false;
 		this.currSymbol = "";
-		this.symbols = new ArrayList<>();
+		
 	}
 	
 
@@ -285,8 +283,8 @@ public class Board {
 	public void placeSymbol(int row,int col,String symbol) {
 		board[row][col] = symbol;
 		
-		this.hasWinner = checkWin(row,col,symbol);
-
+		this.hasWinner = checkWin(symbol);
+		
 		
 	}
 	
@@ -323,49 +321,83 @@ public class Board {
 		return false;
 	}
 	
-	public boolean checkWin(int x, int y, String symbol) {
+	public boolean checkWin(String symbol) {
 		
-
-		int row = 0, col = 0, diag = 0, rdiag = 0;
+		//first row
+		if(board[0][0] == symbol && board[0][1] == symbol && board[0][2] == symbol)
+			return true;
+		if(board[1][0] == symbol && board[1][1] == symbol && board[1][2] == symbol)
+			return true;
+		if(board[2][0] == symbol && board[2][1] == symbol && board[2][2] == symbol)
+			return true;
+		if(board[3][0] == symbol && board[3][1] == symbol && board[3][2] == symbol)
+			return true;
 		
-		boolean winner = false;
+		//second row
+		if(board[0][1] == symbol && board[0][2] == symbol && board[0][3] == symbol)
+			return true;
+		if(board[1][1] == symbol && board[1][2] == symbol && board[1][3] == symbol)
+			return true;
+		if(board[2][1] == symbol && board[2][2] == symbol && board[2][3] == symbol)
+			return true;
+		if(board[3][1] == symbol && board[3][2] == symbol && board[3][3] == symbol)
+			return true;
 		
-		for(int i = 0;i<4;i++) {
-			if(board[x][i] == symbol) {
-				col++;
-//				
-			}
-				
-			if(board[i][y] == symbol) {
-				row++;
-			}
-				
-			if(board[i][i] == symbol) {
-				diag++;
-			}
-				
-			if(board[i][(4-1)-i] == symbol) {
-				rdiag++;
-			}
-				
-			
-			
-			if(row == 3) {
-				//check if the symbols are next to each other
-				
-//				if([i][y])
-			}
-			
-			if(row == 3 || col == 3 || diag == 3 || rdiag == 3 ) {
-				winner = true;
-				break;
-			}
-				
-		}
 		
-		return winner;
-
+		//first col
+		if(board[0][0] == symbol && board[1][0] == symbol && board[2][0] == symbol)
+			return true;
+		if(board[0][1] == symbol && board[1][1] == symbol && board[2][1] == symbol)
+			return true;
+		if(board[0][2] == symbol && board[1][2] == symbol && board[2][2] == symbol)
+			return true;
+		if(board[0][3] == symbol && board[1][3] == symbol && board[2][3] == symbol)
+			return true;
+		
+		//second col
+		if(board[1][0] == symbol && board[2][0] == symbol && board[3][0] == symbol)
+			return true;
+		if(board[1][1] == symbol && board[2][1] == symbol && board[3][1] == symbol)
+			return true;
+		if(board[1][2] == symbol && board[2][2] == symbol && board[3][2] == symbol)
+			return true;
+		if(board[1][3] == symbol && board[2][3] == symbol && board[3][3] == symbol)
+			return true;
+		
+		//first diag 
+		if(board[0][1] == symbol && board[1][2] == symbol && board[2][3] == symbol)
+			return true;
+		if(board[0][0] == symbol && board[1][1] == symbol && board[2][2] == symbol)
+			return true;
+		if(board[1][0] == symbol && board[2][1] == symbol && board[3][2] == symbol)
+			return true;
+		if(board[1][1] == symbol && board[2][2] == symbol && board[3][3] == symbol)
+			return true;
+		
+		
+		//second diag
+		if(board[2][0] == symbol && board[1][1] == symbol && board[0][2] == symbol)
+			return true;
+		if(board[0][3] == symbol && board[1][2] == symbol && board[2][1] == symbol)
+			return true;
+		if(board[1][2] == symbol && board[2][1] == symbol && board[3][0] == symbol)
+			return true;
+		if(board[1][3] == symbol && board[2][2] == symbol && board[3][1] == symbol)
+			return true;
+		
+		
+		
+		
+		return false;
+	
+		
 	}
+		
+		
+		
+		
+		
+	
 		
 	
 	public String[][] getBoard(){	
