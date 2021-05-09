@@ -11,6 +11,8 @@ public class Board {
 	private Scanner scanner;
 	private boolean hasWinner;
 	private String currSymbol;
+	private ArrayList<Symbols> symbols;
+	
 	
 	public Board() {
 		this.human = new Human("X");
@@ -22,6 +24,7 @@ public class Board {
 		this.scanner = new Scanner(System.in);
 		this.hasWinner = false;
 		this.currSymbol = "";
+		this.symbols = new ArrayList<>();
 	}
 	
 
@@ -328,14 +331,30 @@ public class Board {
 		boolean winner = false;
 		
 		for(int i = 0;i<4;i++) {
-			if(board[x][i] == symbol )
+			if(board[x][i] == symbol) {
 				col++;
-			if(board[i][y] == symbol )
+//				
+			}
+				
+			if(board[i][y] == symbol) {
 				row++;
-			if(board[i][i] == symbol)
+			}
+				
+			if(board[i][i] == symbol) {
 				diag++;
-			if(board[i][(4-1)-i] == symbol)
+			}
+				
+			if(board[i][(4-1)-i] == symbol) {
 				rdiag++;
+			}
+				
+			
+			
+			if(row == 3) {
+				//check if the symbols are next to each other
+				
+//				if([i][y])
+			}
 			
 			if(row == 3 || col == 3 || diag == 3 || rdiag == 3 ) {
 				winner = true;
