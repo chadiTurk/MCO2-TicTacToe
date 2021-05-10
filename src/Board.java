@@ -11,7 +11,8 @@ public class Board {
 	private Scanner scanner;
 	private boolean hasWinner;
 	private String currSymbol;
-
+	private ArrayList<Integer> numbersLeft;
+	
 	public Board() {
 		this.human = new Human("X");
 		this.computer = new Computer("O");
@@ -21,8 +22,8 @@ public class Board {
 		this.locations = new int[4][4];
 		this.scanner = new Scanner(System.in);
 		this.hasWinner = false;
-		this.currSymbol = "";
-		
+		this.currSymbol = "X";
+		this.numbersLeft = new ArrayList<>();
 	}
 	
 
@@ -31,29 +32,56 @@ public class Board {
 		
 		String number;
 		
-		
-		
-		
 		initializeBoard();
 		initializeLocations();
+		initializeNumbersNotTaken();
+		computer.setnumbersLeft(numbersLeft);
 		
 		drawLocations();
 		drawBoard();
 		
+		
+		
 		while(boardIsNotFull() && hasWinner == false) {
 			
-			System.out.println("Enter number:");
-			number = scanner.nextLine();
-			playerMove(number);
 			
+			
+			if(this.human.getIsTurn() == true) {
+				System.out.println(human.getName() + "s Turn (" + currSymbol + ")");
+				System.out.println("Enter number:");
+				number = scanner.nextLine();
+				playerMove(number);
+//				computer.setnumbersLeft(numbersLeft);
+			}
+			else if(this.computer.getIsTurn() == true) {
+				System.out.println(computer.getName() + "s Turn (" + currSymbol + ")");
+				String num = computer.generateBehavior(board);
+				playerMove(num);
+			}
 			System.out.println(System.lineSeparator().repeat(150));
 			drawLocations();
 			drawBoard();
 			
+			if(currSymbol == "X")
+				currSymbol = "O";
+			else if(currSymbol == "O")
+				currSymbol = "X";
 			//checkWin Conditions Here
 		}
 		
 		
+		hasWinner = false;
+		
+		if(human.getSymbol() == "X") {
+			human.setSymbol("O");
+			computer.setSymbol("X");
+		}else {
+			human.setSymbol("X");
+			computer.setSymbol("O");
+		}
+		
+		
+		this.currSymbol = "X";
 		
 	}
 	
@@ -140,6 +168,7 @@ public class Board {
 	
 	public boolean playerMove(String move){
 		
+		//todo add numbersLeft.add(num) to all cases	
 		String symbol = checkTurn();
 		currSymbol = symbol;
 		
@@ -152,7 +181,7 @@ public class Board {
 				}
 				
 				placeSymbol(0,0, symbol);
-				
+				numbersLeft.remove(Integer.valueOf(1));
 				break;
 			case "2":
 				if(checkIfEmpty(0,1) == false){
@@ -160,7 +189,7 @@ public class Board {
 				}
 				
 				placeSymbol(0,1,symbol);
-				
+				numbersLeft.remove(Integer.valueOf(2));
 				break;
 			case "3":
 				if(checkIfEmpty(0,2) == false){
@@ -168,7 +197,7 @@ public class Board {
 				}
 				
 				placeSymbol(0,2,symbol);
-				
+				numbersLeft.remove(Integer.valueOf(3));
 				break;
 			case "4":
 				if(checkIfEmpty(0,3) == false){
@@ -176,7 +205,7 @@ public class Board {
 				}
 				
 				placeSymbol(0,3,symbol);
-				
+				numbersLeft.remove(Integer.valueOf(4));
 				break;
 			case "5":
 				if(checkIfEmpty(1,0) == false){
@@ -184,7 +213,7 @@ public class Board {
 				}
 				
 				placeSymbol(1,0,symbol);
-				
+				numbersLeft.remove(Integer.valueOf(5));
 				break;
 			case "6":
 				if(checkIfEmpty(1,1) == false){
@@ -192,7 +221,7 @@ public class Board {
 				}
 				
 				placeSymbol(1,1,symbol);
-				
+				numbersLeft.remove(Integer.valueOf(6));
 				break;
 			case "7":
 				if(checkIfEmpty(1,2) == false){
@@ -200,7 +229,7 @@ public class Board {
 				}
 				
 				placeSymbol(1,2,symbol);
-				
+				numbersLeft.remove(Integer.valueOf(7));
 				break;
 			case "8":
 				if(checkIfEmpty(1,3) == false){
@@ -208,7 +237,7 @@ public class Board {
 				}
 				
 				placeSymbol(1,3,symbol);
-				
+				numbersLeft.remove(Integer.valueOf(8));
 				break;
 			case "9":
 				if(checkIfEmpty(2,0) == false){
@@ -216,7 +245,7 @@ public class Board {
 				}
 				
 				placeSymbol(2,0,symbol);
-				
+				numbersLeft.remove(Integer.valueOf(9));
 				break;
 			case "10":
 				if(checkIfEmpty(2,1) == false){
@@ -224,7 +253,7 @@ public class Board {
 				}
 				
 				placeSymbol(2,1,symbol);
-				
+				numbersLeft.remove(Integer.valueOf(10));
 				break;
 			case "11":
 				if(checkIfEmpty(2,2) == false){
@@ -232,7 +261,7 @@ public class Board {
 				}
 				
 				placeSymbol(2,2,symbol);
-				
+				numbersLeft.remove(Integer.valueOf(11)); 
 				break;
 			case "12":
 				if(checkIfEmpty(2,3) == false){
@@ -240,7 +269,7 @@ public class Board {
 				}
 				
 				placeSymbol(2,3,symbol);
-				
+				numbersLeft.remove(Integer.valueOf(12));
 				break;
 			case "13":
 				if(checkIfEmpty(3,0) == false){
@@ -248,7 +277,7 @@ public class Board {
 				}
 				
 				placeSymbol(3,0,symbol);
-				
+				numbersLeft.remove(Integer.valueOf(13));
 				break;
 			case "14":
 				if(checkIfEmpty(3,1) == false){
@@ -256,7 +285,7 @@ public class Board {
 				}
 				
 				placeSymbol(3,1,symbol);
-				
+				numbersLeft.remove(Integer.valueOf(14)); 
 				break;
 			case "15":
 				if(checkIfEmpty(3,2) == false){
@@ -264,7 +293,7 @@ public class Board {
 				}
 				
 				placeSymbol(3,2,symbol);
-				
+				numbersLeft.remove(Integer.valueOf(15)); 
 				break;
 			case "16":
 				if(checkIfEmpty(3,3) == false){
@@ -272,7 +301,7 @@ public class Board {
 				}
 				
 				placeSymbol(3,3,symbol);
-				
+				numbersLeft.remove(Integer.valueOf(16));
 				break;
 		}
 		
@@ -299,14 +328,17 @@ public class Board {
 	public String checkTurn() {
 		if(computer.isTurn == true) {
 			computer.isTurn = false;
+			human.isTurn = true;
 			return computer.getSymbol();
 		}
 			
-		else {
+		else if(human.isTurn == true){
+			human.isTurn = false;
 			computer.isTurn = true;
 			return human.getSymbol();
 		}
-			
+		
+		return "";
 	}
 	
 	public boolean boardIsNotFull() {
@@ -385,22 +417,24 @@ public class Board {
 		if(board[1][3] == symbol && board[2][2] == symbol && board[3][1] == symbol)
 			return true;
 		
-		
-		
-		
+	
 		return false;
 	
 		
 	}
 		
-		
-		
-		
-		
-	
-		
 	
 	public String[][] getBoard(){	
 		return this.board;
 	}
+	
+	public void initializeNumbersNotTaken() {
+		for(int i = 1;i<=16;i++) {
+			this.numbersLeft.add(i);
+		}
+	}
+	public ArrayList<Integer> getnumbersLeft(){
+		return this.numbersLeft;
+	}
+	
 }
