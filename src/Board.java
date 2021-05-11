@@ -30,13 +30,18 @@ public class Board {
 	
 	public void startGame() {
 		
+	
+		
 		String number;
 		
 		initializeBoard();
+	
 		initializeLocations();
+	
 		initializeNumbersNotTaken();
+	
 		computer.setnumbersLeft(numbersLeft);
-		
+	
 		drawLocations();
 		drawBoard();
 		
@@ -49,6 +54,7 @@ public class Board {
 			if(this.human.getIsTurn() == true) {
 				System.out.println(human.getName() + "s Turn (" + currSymbol + ")");
 				System.out.println("Enter number:");
+				//CHECK IF MOVE IS SCANNER MOVE IS LEGAL IF THE LOCATION IS EMPTY1
 				number = scanner.nextLine();
 				playerMove(number);
 //				computer.setnumbersLeft(numbersLeft);
@@ -429,6 +435,9 @@ public class Board {
 	}
 	
 	public void initializeNumbersNotTaken() {
+		
+		this.numbersLeft.clear();
+		
 		for(int i = 1;i<=16;i++) {
 			this.numbersLeft.add(i);
 		}

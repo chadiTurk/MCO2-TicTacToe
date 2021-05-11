@@ -21,6 +21,6 @@ public class Main {
 			System.out.print("Option: ");
 			option = scanner.nextInt();
 			System.out.println(option);
-		}while(option == 1 || option == 0);
+		}while(option == 1);
 	}
 }

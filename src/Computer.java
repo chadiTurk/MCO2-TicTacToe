@@ -28,13 +28,9 @@ public class Computer extends Entity{
 	
 	public void setnumbersLeft(ArrayList<Integer> numbersLeftBoard) {
 		
-		for(int i = 0; i<numbersLeftBoard.size();i++) {
-			this.numbersLeft.add(numbersLeftBoard.get(i));
-		}
 		
-		System.out.println("hello");
 		this.numbersLeft = numbersLeftBoard;
-		System.out.println("this numbers left size " + this.numbersLeft.size());
+		
 	}
 	
 	public String generateBehavior(String[][] board) {
@@ -78,9 +74,9 @@ public class Computer extends Entity{
 			return this.number;
 		}
 		
-//		else if(checkHumanWin()) {
-//			
-//		}
+		else if(checkHumanWin()) {
+			return this.number;
+		}
 		
 		else {
 			
@@ -99,20 +95,15 @@ public class Computer extends Entity{
 			return num;
 			
 		}
-		
-		
-		//check if there's a possible wnning move here for the human
-		
-		//else just do a random move
-		
-		
-		
+				
 		
 	}
 	
 	public boolean checkComputerWin() {
 		
 		//row1
+		
+		
 		
 		if(currentBoard[0][0] == symbol && currentBoard[0][1] == symbol && currentBoard[0][2] == "-") {
 			this.number = "3";
@@ -494,8 +485,396 @@ public class Computer extends Entity{
 		return false;
 	}
 	
-	public void checkHumanWin() {
+	public boolean checkHumanWin() {
+		
+		
+		String humanSymbol;
+		
+		if(this.symbol == "X")
+			humanSymbol = "O";
+		else {
+			humanSymbol = "X";
+		}
+		
 		//make this return boolean
+		if(currentBoard[0][0] == humanSymbol && currentBoard[0][1] == humanSymbol && currentBoard[0][2] == "-") {
+			this.number = "3";
+			return true;
+		}
+		
+		if(currentBoard[1][0] == humanSymbol && currentBoard[1][1] == humanSymbol && currentBoard[1][2] == "-") {
+			this.number = "7";
+			return true;
+		}
+		
+		if(currentBoard[2][0] == humanSymbol && currentBoard[2][1] == humanSymbol && currentBoard[2][2] == "-") {
+			this.number = "11";
+			return true;
+		}
+		
+		if(currentBoard[3][0] == humanSymbol && currentBoard[3][1] == humanSymbol && currentBoard[3][2] == "-") {
+			this.number = "15";
+			return true;
+		}
+		
+		//row2
+		
+		if(currentBoard[0][1] == humanSymbol && currentBoard[0][2] == humanSymbol && currentBoard[0][0] == "-") {
+			this.number = "1";
+			return true;
+		}
+		
+		if(currentBoard[0][1] == humanSymbol && currentBoard[0][2] == humanSymbol && currentBoard[0][3] == "-") {
+			this.number = "4";
+			return true;
+		}
+		
+		if(currentBoard[1][1] == humanSymbol && currentBoard[1][2] == humanSymbol && currentBoard[1][0] == "-") {
+			this.number = "5";
+			return true;
+		}
+		
+		if(currentBoard[1][1] == humanSymbol && currentBoard[1][2] == humanSymbol && currentBoard[1][3] == "-") {
+			this.number = "8";
+			return true;
+		}
+		
+		if(currentBoard[2][1] == humanSymbol && currentBoard[2][2] == humanSymbol && currentBoard[2][0] == "-") {
+			this.number = "9";
+			return true;
+		}
+		
+		if(currentBoard[2][1] == humanSymbol && currentBoard[2][2] == humanSymbol && currentBoard[2][3] == "-") {
+			this.number = "12";
+			return true;
+		}
+		
+		if(currentBoard[3][1] == humanSymbol && currentBoard[3][2] == humanSymbol && currentBoard[3][0] == "-") {
+			this.number = "13";
+			return true;
+		}
+		
+		if(currentBoard[3][1] == humanSymbol && currentBoard[3][2] == humanSymbol && currentBoard[3][3] == "-") {
+			this.number = "16";
+			return true;
+		}
+		
+		//row3
+		
+		if(currentBoard[0][2] == humanSymbol && currentBoard[0][3] == humanSymbol && currentBoard[0][1] == "-") {
+			this.number = "2";
+			return true;
+		}
+		
+		if(currentBoard[1][2] == humanSymbol && currentBoard[1][3] == humanSymbol && currentBoard[1][1] == "-") {
+			this.number = "6";
+			return true;
+		}
+		
+		if(currentBoard[2][2] == humanSymbol && currentBoard[2][3] == humanSymbol && currentBoard[2][1] == "-") {
+			this.number = "10";
+			return true;
+		}
+		
+		if(currentBoard[3][2] == humanSymbol && currentBoard[3][3] == humanSymbol && currentBoard[3][1] == "-") {
+			this.number = "14";
+			return true;
+		}
+		
+		
+		//col1
+		
+		if(currentBoard[0][0] == humanSymbol && currentBoard[1][0] == humanSymbol && currentBoard[2][0] == "-") {
+			this.number = "9";
+			return true;
+		}
+		
+		if(currentBoard[0][1] == humanSymbol && currentBoard[1][1] == humanSymbol && currentBoard[2][1] == "-") {
+			this.number = "10";
+			return true;
+		}
+		
+		if(currentBoard[0][2] == humanSymbol && currentBoard[1][2] == humanSymbol && currentBoard[2][2] == "-") {
+			this.number = "11";
+			return true;
+		}
+		
+		if(currentBoard[0][3] == humanSymbol && currentBoard[1][3] == humanSymbol && currentBoard[2][3] == "-") {
+			this.number = "12";
+			return true;
+		}
+		
+		//col 2
+		
+		if(currentBoard[1][0] == humanSymbol && currentBoard[2][0] == humanSymbol && currentBoard[0][0] == "-") {
+			this.number = "1";
+			return true;
+		}
+		
+		if(currentBoard[1][0] == humanSymbol && currentBoard[2][0] == humanSymbol && currentBoard[3][0] == "-") {
+			this.number = "13";
+			return true;
+		}
+		
+		if(currentBoard[1][1] == humanSymbol && currentBoard[2][1] == humanSymbol && currentBoard[0][1] == "-") {
+			this.number = "2";
+			return true;
+		}
+		
+		if(currentBoard[1][1] == humanSymbol && currentBoard[2][1] == humanSymbol && currentBoard[3][1] == "-") {
+			this.number = "14";
+			return true;
+		}
+		
+		if(currentBoard[1][2] == humanSymbol && currentBoard[2][2] == humanSymbol && currentBoard[0][2] == "-") {
+			this.number = "3";
+			return true;
+		}
+		
+		if(currentBoard[1][2] == humanSymbol && currentBoard[2][2] == humanSymbol && currentBoard[3][2] == "-") {
+			this.number = "15";
+			return true;
+		}
+		
+		if(currentBoard[1][3] == humanSymbol && currentBoard[2][3] == humanSymbol && currentBoard[0][3] == "-") {
+			this.number = "4";
+			return true;
+		}
+		
+		if(currentBoard[1][3] == humanSymbol && currentBoard[2][3] == humanSymbol && currentBoard[3][3] == "-") {
+			this.number = "16";
+			return true;
+		}
+		
+		//col 3
+		
+		if(currentBoard[2][0] == humanSymbol && currentBoard[3][0] == humanSymbol && currentBoard[1][0] == "-") {
+			this.number = "5";
+			return true;
+		}
+		
+		if(currentBoard[2][1] == humanSymbol && currentBoard[3][1] == humanSymbol && currentBoard[1][1] == "-") {
+			this.number = "6";
+			return true;
+		}
+		
+		if(currentBoard[2][2] == humanSymbol && currentBoard[3][2] == humanSymbol && currentBoard[1][2] == "-") {
+			this.number = "7";
+			return true;
+		}
+		
+		if(currentBoard[2][3] == humanSymbol && currentBoard[3][3] == humanSymbol && currentBoard[1][3] == "-") {
+			this.number = "8";
+			return true;
+		}
+		
+		//diag 1
+		
+		if(currentBoard[0][1] == humanSymbol && currentBoard[3][0] == humanSymbol && currentBoard[2][3] == "-") {
+			this.number = "12";
+			return true;
+		}
+		
+		if(currentBoard[0][0] == humanSymbol && currentBoard[1][1] == humanSymbol && currentBoard[2][2] == "-") {
+			this.number = "11";
+			return true;
+		}
+		
+		if(currentBoard[1][0] == humanSymbol && currentBoard[2][1] == humanSymbol && currentBoard[3][2] == "-") {
+			this.number = "15";
+			return true;
+		}
+		
+		if(currentBoard[1][2] == humanSymbol && currentBoard[2][3] == humanSymbol && currentBoard[0][1] == "-") {
+			this.number = "2";
+			return true;
+		}
+		
+		if(currentBoard[1][1] == humanSymbol && currentBoard[2][2] == humanSymbol && currentBoard[0][0] == "-") {
+			this.number = "1";
+			return true;
+		}
+		
+		if(currentBoard[1][1] == humanSymbol && currentBoard[2][2] == humanSymbol && currentBoard[3][3] == "-") {
+			this.number = "16";
+			return true;
+		}
+		
+		if(currentBoard[2][1] == humanSymbol && currentBoard[3][2] == humanSymbol && currentBoard[1][0] == "-") {
+			this.number = "5";
+			return true;
+		}
+		
+		if(currentBoard[2][2] == humanSymbol && currentBoard[3][3] == humanSymbol && currentBoard[1][1] == "-") {
+			this.number = "6";
+			return true;
+		}
+		
+		//diag2
+		
+		if(currentBoard[0][2] == humanSymbol && currentBoard[1][1] == humanSymbol && currentBoard[2][0] == "-") {
+			this.number = "9";
+			return true;
+		}
+		
+		if(currentBoard[0][3] == humanSymbol && currentBoard[1][2] == humanSymbol && currentBoard[2][1] == "-") {
+			this.number = "10";
+			return true;
+		}
+		
+		if(currentBoard[1][3] == humanSymbol && currentBoard[2][2] == humanSymbol && currentBoard[3][1] == "-") {
+			this.number = "14";
+			return true;
+		}
+		
+		if(currentBoard[1][1] == humanSymbol && currentBoard[2][0] == humanSymbol && currentBoard[0][2] == "-") {
+			this.number = "3";
+			return true;
+		}
+		
+		if(currentBoard[1][2] == humanSymbol && currentBoard[2][1] == humanSymbol && currentBoard[0][3] == "-") {
+			this.number = "4";
+			return true;
+		}
+		
+		if(currentBoard[1][2] == humanSymbol && currentBoard[2][1] == humanSymbol && currentBoard[3][0] == "-") {
+			this.number = "13";
+			return true;
+		}
+		
+		if(currentBoard[3][1] == humanSymbol && currentBoard[2][2] == humanSymbol && currentBoard[1][3] == "-") {
+			this.number = "8";
+			return true;
+		}
+		
+		if(currentBoard[2][1] == humanSymbol && currentBoard[3][0] == humanSymbol && currentBoard[1][2] == "-") {
+			this.number = "7";
+			return true;
+		}
+		
+		// IN between::
+		
+		if(currentBoard[0][0] == humanSymbol && currentBoard[2][0] == humanSymbol && currentBoard[1][0] == "-") {
+			this.number = "5";
+			return true;
+		}
+		
+		if(currentBoard[0][1] == humanSymbol && currentBoard[2][1] == humanSymbol && currentBoard[1][1] == "-") {
+			this.number = "6";
+			return true;
+		}
+		
+		if(currentBoard[0][2] == humanSymbol && currentBoard[2][2] == humanSymbol && currentBoard[1][2] == "-") {
+			this.number = "7";
+			return true;
+		}
+		
+		if(currentBoard[0][3] == humanSymbol && currentBoard[2][3] == humanSymbol && currentBoard[1][3] == "-") {
+			this.number = "8";
+			return true;
+		}
+		
+		if(currentBoard[0][0] == humanSymbol && currentBoard[2][2] == humanSymbol && currentBoard[1][1] == "-") {
+			this.number = "6";
+			return true;
+		}
+		
+		if(currentBoard[0][2] == humanSymbol && currentBoard[2][0] == humanSymbol && currentBoard[1][1] == "-") {
+			this.number = "6";
+			return true;
+		}
+		
+		if(currentBoard[0][1] == humanSymbol && currentBoard[2][3] == humanSymbol && currentBoard[1][2] == "-") {
+			this.number = "7";
+			return true;
+		}
+		
+		if(currentBoard[0][3] == humanSymbol && currentBoard[2][1] == humanSymbol && currentBoard[1][2] == "-") {
+			this.number = "7";
+			return true;
+		}
+		
+		if(currentBoard[1][0] == humanSymbol && currentBoard[3][0] == humanSymbol && currentBoard[2][0] == "-") {
+			this.number = "9";
+			return true;
+		}
+		
+		if(currentBoard[1][1] == humanSymbol && currentBoard[3][1] == humanSymbol && currentBoard[2][1] == "-") {
+			this.number = "10";
+			return true;
+		}
+		
+		if(currentBoard[1][2] == humanSymbol && currentBoard[3][2] == humanSymbol && currentBoard[2][2] == "-") {
+			this.number = "11";
+			return true;
+		}
+		
+		if(currentBoard[1][3] == humanSymbol && currentBoard[3][3] == humanSymbol && currentBoard[2][3] == "-") {
+			this.number = "12";
+			return true;
+		}
+		
+		if(currentBoard[1][0] == humanSymbol && currentBoard[3][2] == humanSymbol && currentBoard[2][1] == "-") {
+			this.number = "10";
+			return true;
+		}
+		
+		if(currentBoard[1][2] == humanSymbol && currentBoard[3][0] == humanSymbol && currentBoard[2][1] == "-") {
+			this.number = "10";
+			return true;
+		}
+		
+		if(currentBoard[1][1] == humanSymbol && currentBoard[3][3] == humanSymbol && currentBoard[2][2] == "-") {
+			this.number = "11";
+			return true;
+		}
+		
+		if(currentBoard[1][3] == humanSymbol && currentBoard[3][1] == humanSymbol && currentBoard[2][2] == "-") {
+			this.number = "11";
+			return true;
+		}
+		
+		if(currentBoard[0][0] == humanSymbol && currentBoard[0][2] == humanSymbol && currentBoard[0][1] == "-") {
+			this.number = "2";
+			return true;
+		}
+		
+		if(currentBoard[1][0] == humanSymbol && currentBoard[1][2] == humanSymbol && currentBoard[1][1] == "-") {
+			this.number = "6";
+			return true;
+		}
+		
+		if(currentBoard[2][0] == humanSymbol && currentBoard[2][2] == humanSymbol && currentBoard[2][1] == "-") {
+			this.number = "10";
+			return true;
+		}
+		
+		if(currentBoard[3][0] == humanSymbol && currentBoard[3][2] == humanSymbol && currentBoard[3][1] == "-") {
+			this.number = "14";
+			return true;
+		}
+		
+		if(currentBoard[0][1] == humanSymbol && currentBoard[0][3] == humanSymbol && currentBoard[0][2] == "-") {
+			this.number = "3";
+			return true;
+		}
+		
+		if(currentBoard[1][1] == humanSymbol && currentBoard[1][3] == humanSymbol && currentBoard[1][2] == "-") {
+			this.number = "7";
+			return true;
+		}
+		
+		if(currentBoard[2][1] == humanSymbol && currentBoard[2][3] == humanSymbol && currentBoard[2][2] == "-") {
+			this.number = "11";
+			return true;
+		}
+		
+		if(currentBoard[3][1] == humanSymbol && currentBoard[3][3] == humanSymbol && currentBoard[3][2] == "-") {
+			this.number = "15";
+			return true;
+		}
+		
+		return false;
 	}
 	
 	public void levelOne() {
