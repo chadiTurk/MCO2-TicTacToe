@@ -80,8 +80,6 @@ public class Computer extends Entity{
 		
 		else {
 			
-			System.out.println( "size of numbers left" + numbersLeft.size());
-			
 			for(int i = 0;i<this.numbersLeft.size();i++) {
 				System.out.println(numbersLeft.get(i));
 			}

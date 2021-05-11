@@ -108,7 +108,7 @@ public class Board {
 				System.out.println("INVALID: That location is already occupied.");
 			}
 			
-			else{
+			else if(temp < 1 || temp > 16){
 				System.out.println("INVALID: That location is invalid.");
 			}
 			
