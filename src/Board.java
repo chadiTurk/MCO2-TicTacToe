@@ -53,9 +53,9 @@ public class Board {
 			
 			if(this.human.getIsTurn() == true) {
 				System.out.println(human.getName() + "s Turn (" + currSymbol + ")");
-				System.out.println("Enter number:");
+				
 				//CHECK IF MOVE IS SCANNER MOVE IS LEGAL IF THE LOCATION IS EMPTY1
-				number = scanner.nextLine();
+				number = getHumanInput();
 				playerMove(number);
 //				computer.setnumbersLeft(numbersLeft);
 			}
@@ -89,6 +89,52 @@ public class Board {
 		
 		this.currSymbol = "X";
 		
+	}
+	
+	public String getHumanInput() {
+		
+		String number;
+		Integer temp;
+		boolean validLocation;
+		
+		do {
+			System.out.println("Enter number:");
+			number = scanner.nextLine();
+			temp = Integer.valueOf(number);
+			
+			validLocation = searchForNum(temp);
+			
+			if(!validLocation && temp > 0 && temp < 17){
+				System.out.println("INVALID: That location is already occupied.");
+			}
+			
+			else{
+				System.out.println("INVALID: That location is invalid.");
+			}
+			
+		}while(temp <1 || temp > 16 || validLocation == false);
+		
+		
+		return number;
+		
+	}
+	
+	
+	public boolean searchForNum(Integer number){
+		
+		boolean numberAvail = false;
+		
+		if(number > 0 && number < 17) {
+			for(int i=0;i<this.numbersLeft.size();i++) {
+				if(numbersLeft.get(i) == number) {
+					numberAvail = true;
+					break;
+				}
+					
+			}
+		}
+	
+		return numberAvail;
 	}
 	
 	public void initializeBoard() {
