@@ -11,7 +11,6 @@ public class Computer extends Entity{
 	
 	public Computer(String symbol) {
 		super(symbol,"Computer");
-		this.level = 0;
 		this.numbersLeft = new ArrayList<>();
 	}
 	
@@ -39,7 +38,7 @@ public class Computer extends Entity{
 		
 		setCurrentBoard(board);
 		
-		//possible to return an  objec that contains x and y coordinate that the cpu would make 
+		
 		
 		if(this.level == 0) {
 			decision = levelZero();
@@ -47,10 +46,15 @@ public class Computer extends Entity{
 			return decision;
 		}
 		else if(this.level == 1) {
-			//hard coded table
+			//hard coded table 
+			decision = levelOne();
+			
+			return decision;
+			
 		}
 		else if(this.level == 2) {
 			//search strategy
+			
 		}
 		
 		return "";
@@ -58,45 +62,59 @@ public class Computer extends Entity{
 	
 	public String levelZero() {
 		//return row col coordinates of move chosen by cpu
+	
+		String generateNumber = randomMove();
 		
 		
+		return generateNumber;
+
+	}
+	
+	public String randomMove() {
+		for(int i = 0;i<this.numbersLeft.size();i++) {
+			System.out.println(numbersLeft.get(i));
+		}
 		
+		Integer temp = numbersLeft.get(new Random().nextInt(numbersLeft.size()));
 		
-		/*
-		 * 1. Check first if the cpu already has a win on the next move
-		 * 2. If none, check if enemy has a possible winning move then block that
-		 * 2. If none, just do a random move
-		 */
+		System.out.println(temp);
 		
-		// check if there's a possible winning move here for the cpu
+		String num = String.valueOf(temp);
+		
+		return num;
+	}
+	
+	public String levelOne() {
+		//return row col coordinates of move chosen by cpu
+		String generateNumber;
+		//find some way to perform symmetry with the tic tac toe symbols
 		
 		if(checkComputerWin()) {
 			return this.number;
 		}
-		
 		else if(checkHumanWin()) {
 			return this.number;
 		}
-		
 		else {
+			//symmetries here
 			
-			for(int i = 0;i<this.numbersLeft.size();i++) {
-				System.out.println(numbersLeft.get(i));
-			}
+			generateNumber = randomMove();
 			
-			Integer temp = numbersLeft.get(new Random().nextInt(numbersLeft.size()));
-			
-			System.out.println(temp);
-			
-			String num = String.valueOf(temp);
-			
-			return num;
+			return generateNumber;
 			
 		}
-				
+		 //CHANGE THIS TO RETURN A NUMBER INDICATING THE DECISION OF THE CPU
 		
 	}
 	
+	public String levelTwo() {
+		
+		
+		
+	
+		return "";
+	}
+
 	public boolean checkComputerWin() {
 		
 		//row1
@@ -873,14 +891,6 @@ public class Computer extends Entity{
 		}
 		
 		return false;
-	}
-	
-	public void levelOne() {
-		//return row col coordinates of move chosen by cpu
-	}
-	
-	public void levelTwo() {
-		//return row col coordinates of move chosen by cpu
 	}
 
 	public int getLevel() {

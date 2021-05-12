@@ -12,6 +12,7 @@ public class Board {
 	private boolean hasWinner;
 	private String currSymbol;
 	private ArrayList<Integer> numbersLeft;
+	private Integer level;
 	
 	public Board() {
 		this.human = new Human("X");
@@ -30,8 +31,8 @@ public class Board {
 	
 	public void startGame() {
 		
-	
 		
+		Scanner numberScan = new Scanner(System.in);
 		String number;
 		
 		initializeBoard();
@@ -42,8 +43,23 @@ public class Board {
 	
 		computer.setnumbersLeft(numbersLeft);
 	
+		do {
+			System.out.println("Enter level for computer (0-2):");
+			level = numberScan.nextInt();
+			
+			if(level < 0 || level >2) {
+				System.out.println("Please enter a valid level");
+			}
+			else {
+				computer.initializeLevel(level);
+			}
+			
+		}while(level < 0 || level > 2);
+		
+		
 		drawLocations();
 		drawBoard();
+		
 		
 		
 		
@@ -75,6 +91,9 @@ public class Board {
 			//checkWin Conditions Here
 		}
 		
+		if(boardIsNotFull() == false) {
+			System.out.println("It's a tie!");
+		}
 		
 		hasWinner = false;
 		
